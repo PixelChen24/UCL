@@ -38,8 +38,8 @@ def best_split(M):
     
     # 对于前num_rows-1行，每行选择57个元素
     selections_per_row = [57] * (num_rows - 1)
-    # 最后一行选择59个元素
-    selections_per_row.append(59)
+    # 最后一行选择60个元素
+    selections_per_row.append(60)
     
     row_sums = []  # 记录每一行的和
     selected_indexes = []
@@ -71,7 +71,7 @@ def best_split(M):
 
 def design_split(json_file = "DomainDataset/statistic_result.json"):
     """
-    根据统计结果，从每个Domain中挑选出57个类别（最后一个Domain有59个类别）
+    根据统计结果，从每个Domain中挑选出57个类别（最后一个Domain有60个类别）
     """
     with open(json_file, "r") as f:
         raw_data = json.load(f)
@@ -96,7 +96,7 @@ def record_split(domains_list, selected_indexes, selected_sums):
     selected_indexes: 每个domain中出现的类别标号
     selected_nums: 每个domain中的样本总数
     """
-    assert len(selected_indexes[0]) == 57 and len(selected_indexes[-1]) == 59, "Domain拆分失败，请检查每个Domain中的类别数目是否符合要求！"
+    assert len(selected_indexes[0]) == 57 and len(selected_indexes[-1]) == 60, "Domain拆分失败，请检查每个Domain中的类别数目是否符合要求！"
     dir_name = "./DomainDataset/split/split_design_seed_{}_total_{}".format(seed, sum(selected_sums))
     if os.path.exists(dir_name) == False:
         os.makedirs(dir_name)
@@ -169,4 +169,4 @@ if __name__ == '__main__':
 
     # statistic()
     # design_split()
-    split("split_design_seed_42_total_126527")
+    split("split_design_seed_42_total_126540")
